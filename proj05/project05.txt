@@ -1,0 +1,122 @@
+
+
+CSE 320 Spring 2015
+
+Computer Project #5 -- Number Systems and Integer Representation
+
+Assignment Overview:
+
+  This assignment develops familiarity with the C programming language, the
+  "gcc" compiler, number systems, and twos complement representation.
+
+  It is worth 30 points (3% of course grade), and must be completed no later
+  than 11:59 PM on Thursday, February 19.
+
+Assignment Specifications:
+
+  1) You will develop a library module which supports the conversion of signed
+  integer values between twos complement internal representation and external
+  representation.  The library module will consist of function "convert" and
+  any additional helper functions which you choose to implement.
+
+  The interface to the library module is through function "convert", which is
+  declared as follows:
+
+    int convert( int, unsigned int, char[] );
+
+  The first argument is the value which is to be converted into external
+  representation.
+
+  The second argument is the base into which the value is to be converted.
+  Valid bases range from 2 to 36 (inclusive).
+
+  The third argument is the address of an array where function "convert" will
+  store the external representation of the value as a null-terminated sequence
+  of ASCII characters.  If the conversion is successful, that representation
+  will be in the form "+N" or "-N", where "N" is the sequence of digits
+  representing the value.  Otherwise, it will be the empty string.
+
+  Function "convert" will return the value 1 if the conversion is successful,
+  and the value 0 otherwise.
+
+  2) You will develop a driver module to test your implementation of the
+  library module.  The driver module will consist of function "main" and any
+  additional helper functions which you choose to implement.
+
+  Your driver module will not be interactive.  If it accepts any input, you
+  will supply that input in a text file named "proj05.tests".
+
+  All output will be appropriately labeled.
+
+Assignment Deliverables:
+
+  The deliverables for this assignment are:
+
+    proj05.makefile  -- the makefile which produces "proj05"
+    proj05.support.c -- the source code for your library module
+    proj05.driver.c  -- the source code for your driver module
+    proj05.tests     -- the input to your driver module, if needed
+
+  Be sure to submit your files for grading via the "handin" program.
+
+
+
+Assignment Notes:
+
+  1) Chapter 2 of the Murdocca and Heuring text contains relevant information
+  about number systems (particularly pages 22-24).
+
+  2) The source code for the library module and the driver module must be in
+  separate files.
+
+  3) Please note that your source code files must be translated by "gcc",
+  which is a C compiler and accepts C source statements (a subset of C++).
+
+  4) You may not call any C standard library functions from your library
+  module.  That is, you may not call functions such as "scanf", "atoi", or
+  "isspace" from function "convert" or any other functions which you choose to
+  implement as part of your library module.
+
+  5) Your library module must convert between integers and characters without
+  using any C standard library functions.  The equivalent integer value of a
+  character from the set {0..9} may be obtained by:
+
+    char ch;  
+    int value = ch - '0';
+
+  Similarly, the equivalent integer value of a character from the set {A..Z}
+  may be obtained by:
+
+    char ch;
+    int value = (ch - 'A') + 10;
+
+  6) Please note that your driver module may not be written as an interactive
+  program, where the user supplies input in response to prompts.  Instead,
+  your test cases will either be included in the source code as literal
+  constants, or will be supplied as inputs to the driver module in a file
+  named "proj05.tests".
+
+  If your driver module requires no inputs, your solution will be executed
+  using:
+
+    proj05
+
+  If your driver module does require inputs, your solution will be executed
+  using:
+
+    proj05 < proj05.tests
+
+  7) Consider the following, which shows the character strings produced by a
+  series of successful conversions.
+
+    int A = 127;
+    int B = -6;
+    char C[80];
+
+    convert( A, 10, &C[0] );  ==>  C contains "+127"
+    convert( A, 16, &C[0] );  ==>  C contains "+7f"
+    convert( B,  2, &C[0] );  ==>  C contains "-110"
+    convert( B,  7, &C[0] );  ==>  C contains "-6"
+
+  For unsuccessful conversions, the character string should be empty.
+
